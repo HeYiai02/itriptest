@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="   
+                http://www.springframework.org/schema/beans 
+                http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+                http://www.springframework.org/schema/aop 
+                http://www.springframework.org/schema/aop/spring-aop-2.5.xsd   
+                http://www.springframework.org/schema/tx 
+                http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+                http://www.springframework.org/schema/context 
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/mvc
+                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.163.com" />
+        <property name="port" value="465" />
+        <property name="protocol" value="smtp" />
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="username" value="heyiai02@163.com" />
+        <!--不是登录QQ的密码，而是授权码-->
+        <property name="password" value="QLOABLVVQSXHANYD" />
+
+        <property name="javaMailProperties">
+            <props>
+                <!-- 设置SMTP服务器需要用户验证 -->
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- 开启SSL安全验证 -->
+                <prop key="mail.smtp.ssl.enable">true</prop>
+                <prop key="mail.transport.protocol">smtps</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="activationMailMessage" class="org.springframework.mail.SimpleMailMessage" scope="prototype">
+        <property name="from" value="heyiai02@163.com"/>
+        <property name="subject" value="【i旅行】请激活您的账户"/>
+        <property name="text" value=""/>
+    </bean>
+
+
+
+</beans>
